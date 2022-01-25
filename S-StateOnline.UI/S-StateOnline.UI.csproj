@@ -170,6 +170,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -235,6 +236,8 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Product\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -251,6 +254,24 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\S-StateOnline.Core\S-StateOnline.Core.csproj">
+      <Project>{3177f26e-2915-4451-93bb-f1564f346ac6}</Project>
+      <Name>S-StateOnline.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\S-StateOnline.DataAccess.Inmemory\S-StateOnline.DataAccess.Inmemory.csproj">
+      <Project>{f5cc60d2-1f2a-428e-a89a-4f98e763183e}</Project>
+      <Name>S-StateOnline.DataAccess.Inmemory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\S-StateOnline.DataAccess\S-StateOnline.DataAccess.csproj">
+      <Project>{040f06f4-5583-41b5-bcf6-359ca4d6a1ef}</Project>
+      <Name>S-StateOnline.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\S-StateOnline.Services\S-StateOnline.Services.csproj">
+      <Project>{b4a1fe30-3fab-4ada-9708-7b51ad794eb2}</Project>
+      <Name>S-StateOnline.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
