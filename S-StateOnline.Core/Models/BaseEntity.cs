@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace S_StateOnline.Core.Models
 {
-    class BaseEntity
+    public class BaseEntity
     {
         public string Id { get; set; }
         public DateTimeOffset CreatedAt { get; set; }

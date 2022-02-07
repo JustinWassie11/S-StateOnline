@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace S_StateOnline.Core.Models
 {
-    class PorductCategory
+    public class ProductCategoryy
     {
         public string Id;
         public string Category { get; set; }
-        public ProductCategory()
+        public ProductCategoryy()
         {
             this.Id = Guid.NewGuid().ToString();
         }

@@ -1,4 +1,4 @@
-﻿using S_StateOnline.Core.Models;
+﻿using S_StateOnline.Core.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace S_StateOnline.DataAccess.Inmemory
 {
-    class InMemoryRepository<T> where T: BaseEntity
+    public class InMemoryRepository<T> : IRepository<T> where T : BaseEntity
     {
         ObjectCache cache = MemoryCache.Default;
         List<T> items;
