@@ -6,13 +6,10 @@ using System.Threading.Tasks;
 
 namespace S_StateOnline.Core.Models
 {
-    public class ProductCategoryy
+    public class ProductCategoryy : BaseEntity
     {
-        public string Id;
+        
         public string Category { get; set; }
-        public ProductCategoryy()
-        {
-            this.Id = Guid.NewGuid().ToString();
-        }
+       
     }
 }

@@ -1,4 +1,5 @@
 ﻿using S_StateOnline.Core.Contracts;
+using S_StateOnline.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;

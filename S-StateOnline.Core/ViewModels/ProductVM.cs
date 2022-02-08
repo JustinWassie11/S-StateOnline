@@ -10,6 +10,6 @@ namespace S_StateOnline.Core.ViewModels
     public class ProductVM
     {
         public Product Product { get; set; }
-        public IEnumerable<ProductCategory> ProductCategories { get; set; }
+        public IEnumerable<ProductCategoryy> ProductCategories { get; set; }
     }
 }

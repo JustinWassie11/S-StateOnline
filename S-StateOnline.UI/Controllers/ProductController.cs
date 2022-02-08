@@ -14,10 +14,10 @@ namespace S_StateOnline.UI.Controllers
     {
         IRepository<Product> context;
         IRepository<ProductCategoryy> productCategories;
-        public ProductController(IRepository<Product> productContext, IRepository<ProductCategory> categoryContext)
+        public ProductController(IRepository<Product> productContext, IRepository<ProductCategoryy> categoryContext)
         {
             context = productContext;
-            productcategories = categoryContext;
+            productCategories = categoryContext;
         }
 
         // GET: Product
@@ -110,7 +110,7 @@ namespace S_StateOnline.UI.Controllers
             {
                 context.Delete(Id);
                 context.Commit();
-                RedirectToAction("Index");
+                return RedirectToAction("Index");
             }
         }
     }
