@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "S-StateOnline.Core", "S-Sta
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "S-StateOnline.Services", "S-StateOnline.Services\S-StateOnline.Services.csproj", "{B4A1FE30-3FAB-4ADA-9708-7B51AD794EB2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "S-StateOnline.DataAccess", "S-StateOnline.DataAccess\S-StateOnline.DataAccess.csproj", "{040F06F4-5583-41B5-BCF6-359CA4D6A1EF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "S-StateOnline.DataAccess.Sql", "S-StateOnline.DataAccess\S-StateOnline.DataAccess.Sql.csproj", "{040F06F4-5583-41B5-BCF6-359CA4D6A1EF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "S-StateOnline.DataAccess.Inmemory", "S-StateOnline.DataAccess.Inmemory\S-StateOnline.DataAccess.Inmemory.csproj", "{F5CC60D2-1F2A-428E-A89A-4F98E763183E}"
 EndProject

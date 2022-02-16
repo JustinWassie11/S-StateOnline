@@ -17,13 +17,13 @@ namespace S_StateOnline.DataAccess.Inmemory
         public InMemoryRepository()
         {
             classname = typeof(T).Name;
-            items = cache["classname"] as List<T>;
+            items = cache[classname] as List<T>;
             if (items == null)
                 items = new List<T>();
         }
         public void Commit()
         {
-            cache["classname"] = items;
+            cache[classname] = items;
         }
         public void Insert(T t)
         {
@@ -35,9 +35,7 @@ namespace S_StateOnline.DataAccess.Inmemory
             if (tToUpdate != null)
                 tToUpdate = t;
             else
-            {
                 throw new Exception(classname + " Not Found");
-            }
         }
         public T Find(string Id)
         {

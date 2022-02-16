@@ -259,10 +259,13 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
     <Content Include="Views\Product\Create.cshtml" />
+    <Content Include="Views\Category\Index.cshtml" />
+    <Content Include="Views\Category\Create.cshtml" />
+    <Content Include="Views\Category\Edit.cshtml" />
+    <Content Include="Views\Category\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Category\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -286,9 +289,9 @@
       <Project>{f5cc60d2-1f2a-428e-a89a-4f98e763183e}</Project>
       <Name>S-StateOnline.DataAccess.Inmemory</Name>
     </ProjectReference>
-    <ProjectReference Include="..\S-StateOnline.DataAccess\S-StateOnline.DataAccess.csproj">
+    <ProjectReference Include="..\S-StateOnline.DataAccess\S-StateOnline.DataAccess.Sql.csproj">
       <Project>{040f06f4-5583-41b5-bcf6-359ca4d6a1ef}</Project>
-      <Name>S-StateOnline.DataAccess</Name>
+      <Name>S-StateOnline.DataAccess.Sql</Name>
     </ProjectReference>
     <ProjectReference Include="..\S-StateOnline.Services\S-StateOnline.Services.csproj">
       <Project>{b4a1fe30-3fab-4ada-9708-7b51ad794eb2}</Project>

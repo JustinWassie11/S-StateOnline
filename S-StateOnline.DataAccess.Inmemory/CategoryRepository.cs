@@ -9,31 +9,31 @@ using System.Threading.Tasks;
 
 namespace S_StateOnline.DataAccess.Inmemory
 {
-    public class CategoryRepository
+    public class CategoryRepository 
     {
         ObjectCache cache = MemoryCache.Default;
-        List<ProductCategory> productCategories;
+        List<ProductCategoryy> productCategories;
 
         public CategoryRepository()
         {
             productCategories = cache["productCategories"] as
-                List<ProductCategory>;
+                List<ProductCategoryy>;
                     if(productCategories == null)
             {
-                productCategories = new List<ProductCategory>();
+                productCategories = new List<ProductCategoryy>();
             }
         }
         public void Commit()
         {
             cache["productCategories"] = productCategories;
         }
-        public void Insert()
+        public void Insert(ProductCategoryy p)
         {
             productCategories.Add(p);
         }
-        public void Update(ProductCategory productCategory)
+        public void Update(ProductCategoryy productCategory)
         {
-            productCategory productCategoryToupdate = productCategories.Find(p => p.Id == productCategory.Id);
+            ProductCategoryy productCategoryToupdate = productCategories.Find(p => p.Id == productCategory.Id);
                 if(productCategoryToupdate != null)
             {
                 productCategoryToupdate = productCategory;
@@ -43,9 +43,9 @@ namespace S_StateOnline.DataAccess.Inmemory
                 throw new Exception("Category Not Found");
             }
         }
-        public ProductCategory Find(string Id)
+        public ProductCategoryy Find(string Id)
         {
-            ProductCategory productCategory = productCategories.Find(p => p.Id == Id);
+            ProductCategoryy productCategory = productCategories.Find(p => p.Id == Id);
                 if(productCategory != null)
             {
                 return productCategory;
@@ -55,13 +55,13 @@ namespace S_StateOnline.DataAccess.Inmemory
                 throw new Exception("Category Not Found");
             }
         }
-        public IQueryable<ProductCategory> Collection()
+        public IQueryable<ProductCategoryy> Collection()
         {
             return productCategories.AsQueryable();
         }
         public void Delete(string Id)
         {
-            ProductCategory productCategoryToDelete = productCategories.Find(p => p.Id == Id);
+            ProductCategoryy productCategoryToDelete = productCategories.Find(p => p.Id == Id);
             if (productCategoryToDelete != null)
             {
                 productCategories.Remove(productCategoryToDelete);

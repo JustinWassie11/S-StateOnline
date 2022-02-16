@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using S_StateOnline.Core.ViewModels;
 
 namespace S_StateOnline.UI.Controllers
 {

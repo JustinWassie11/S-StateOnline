@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace S_StateOnline.Core.ViewModels
 {
-    public class ProductVM
+    public class ProductListVM
     {
-        public Product Product { get; set; }
+        public IEnumerable<Product> Products { get; set; }
         public IEnumerable<ProductCategoryy> ProductCategories { get; set; }
     }
 }
