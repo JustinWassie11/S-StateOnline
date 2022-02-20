@@ -26,6 +26,18 @@ namespace S_StateOnline.UI.Controllers
             List<Product> products = context.Collection().ToList();
             return View(products);
         }
+        public ActionResult Details(string Id)
+        {
+            Product product = context.Find(Id);
+            if(product == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                return View(product);
+            }
+        }
         public ActionResult Create()
         {
             ProductVM viewModel = new ProductVM();

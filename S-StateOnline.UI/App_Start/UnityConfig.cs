@@ -1,6 +1,7 @@
 using S_StateOnline.Core.Contracts;
 using S_StateOnline.Core.Models;
 using S_StateOnline.DataAccess.Inmemory;
+using S_StateOnline.DataAccess.Sql;
 using System;
 
 using Unity;
@@ -45,8 +46,8 @@ namespace S_StateOnline.UI
 
             // TODO: Register your type's mappings here.
             // container.RegisterType<IProductRepository, ProductRepository>();
-            container.RegisterType<IRepository<Product>, InMemoryRepository<Product>>();
-            container.RegisterType<IRepository<ProductCategoryy>, InMemoryRepository<ProductCategoryy>>();
+            container.RegisterType<IRepository<Product>, SqlRepository<Product>>();
+            container.RegisterType<IRepository<ProductCategoryy>, SqlRepository<ProductCategoryy>>();
         }
     }
 }
