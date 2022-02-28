@@ -7,6 +7,7 @@ using S_StateOnline.Core.Models;
 using S_StateOnline.Core.Contracts;
 using S_StateOnline.Core.ViewModels;
 using S_StateOnline.DataAccess.Inmemory;
+using System.IO;
 
 namespace S_StateOnline.UI.Controllers
 {
@@ -46,7 +47,7 @@ namespace S_StateOnline.UI.Controllers
             return View(viewModel);
         }
         [HttpPost]
-        public ActionResult Create(Product product)
+        public ActionResult Create(Product product, HttpPostedFileBase file)
         {
             if (ModelState.IsValid)
             {
@@ -54,7 +55,15 @@ namespace S_StateOnline.UI.Controllers
             }
             else
             {
-                context.Insert(product);
+                if(file != null)
+                {
+                    product.Image = product.Id + Path.GetExtension(file.FileName);
+                    file.SaveAs(Server.MapPath("//Content//ProductImages//" + product.Image));
+                }
+                product.Category = product.Category;
+                product.Description = product.Description;
+                product.Name = product.Name;
+                product.Price = product.Price;
                 context.Commit();
                 return RedirectToAction("Index");
             }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<S_StateOnline.Core.Models.Product>
+﻿@model IEnumerable<S_StateOnline.Core.Models.ProductCategoryy>
 
 @{
     ViewBag.Title = "Index";
@@ -12,22 +12,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Category)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
+            @Html.DisplayNameFor(model => model.CreatedAt)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Category)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Image)
         </th>
         <th></th>
     </tr>
@@ -38,19 +26,7 @@
             @Html.DisplayFor(modelItem => item.CreatedAt)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Category)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Image)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
