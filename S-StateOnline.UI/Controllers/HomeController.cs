@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using S_StateOnline.Core.Contracts;
 using S_StateOnline.Core.Models;
+using S_StateOnline.Core.ViewModels;
 
 namespace S_StateOnline.UI.Controllers
 {
@@ -17,10 +18,23 @@ namespace S_StateOnline.UI.Controllers
             context = productContext;
             productCategories = categoryContext;
         }
-        public ActionResult Index()
+        public ActionResult Index(string Category = null)
         {
-            List<Product> products = context.Collection().ToList();
-            return View(products);
+            List<Product> products;
+            List<ProductCategoryy> categories = productCategories.Collection().ToList();
+            if (Category == null)
+            {
+                products = context.Collection().ToList();
+            }
+            else
+            {
+                products = context.Collection().Where(p => p.Category == Category).ToList();
+            }
+
+            ProductListVM model = new ProductListVM();
+            model.Products = products;
+            model.ProductCategories = categories;
+            return View(model);
         }
 
         public ActionResult Details(string Id)
