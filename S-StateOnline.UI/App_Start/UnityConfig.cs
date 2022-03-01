@@ -7,7 +7,7 @@ using System;
 
 using Unity;
 
-namespace S_StateOnline.UI
+namespace A_StateOnline.UI
 {
     /// <summary>
     /// Specifies the Unity configuration for the main container.
@@ -22,13 +22,11 @@ namespace S_StateOnline.UI
               RegisterTypes(container);
               return container;
           });
-
         /// <summary>
         /// Configured Unity Container.
         /// </summary>
         public static IUnityContainer Container => container.Value;
         #endregion
-
         /// <summary>
         /// Registers the type mappings with the Unity container.
         /// </summary>
@@ -44,13 +42,13 @@ namespace S_StateOnline.UI
             // NOTE: To load from web.config uncomment the line below.
             // Make sure to add a Unity.Configuration to the using statements.
             // container.LoadConfiguration();
-
             // TODO: Register your type's mappings here.
             // container.RegisterType<IProductRepository, ProductRepository>();
             container.RegisterType<IRepository<Product>, SqlRepository<Product>>();
             container.RegisterType<IRepository<ProductCategoryy>, SqlRepository<ProductCategoryy>>();
             container.RegisterType<IRepository<Cart>, SqlRepository<Cart>>();
             container.RegisterType<IRepository<CartItem>, SqlRepository<CartItem>>();
+            container.RegisterType<IRepository<Customer>, SqlRepository<Customer>>();
             container.RegisterType<ICartService, CartService>();
         }
     }

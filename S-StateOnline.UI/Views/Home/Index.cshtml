@@ -1,8 +1,7 @@
 ﻿@model S_StateOnline.Core.ViewModels.ProductListVM
-@{
-    ViewBag.Title = "Home Page";
-}
-
+@{ 
+    ViewBag.Title = "Home Page"; 
+ }
 <h1>Products</h1>
 <div class="col-md-2">
     <h4>Filter By Category</h4>
@@ -30,9 +29,10 @@
         <h4>@item.Price</h4>
     </div>
     <div class="col-md-12">
-        <a href="#" class="bnt btn-success">Add to Cart</a>
+        <a href="@Url.Action("addToCart","Cart", new { Id = item.Id})" class="btn btn-success">Add to Cart</a>
     </div>
 </div>
     }
 </div>
+
 <div class="col-md-12 clearfix"></div>

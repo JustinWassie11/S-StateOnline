@@ -8,7 +8,7 @@ using System.Web;
 
 namespace S_StateOnline.Core.Contracts
 {
-    public class ICartService
+    public interface ICartService
     {
         void AddToCart(HttpContextBase httpContext, string productId);
         void RemoveFromCart(HttpContextBase httpContext, string itemId);
