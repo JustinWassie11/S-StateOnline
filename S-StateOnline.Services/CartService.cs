@@ -6,16 +6,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
-using S_StateOnline.Core.ViewModels;
 
 namespace S_StateOnline.Services
 {
-    public class CartService: ICartService
+    public class CartService
     {
         IRepository<Product> productContext;
         IRepository<Cart> cartContext;
-        public const string CartSessionName = "E-Commerce";
-        public CartService(IRepository<Product>ProductContext, IRepository<Cart> CartContext)
+        public const string CartSessionName = "eCommerce";
+        public CartService(IRepository<Product> ProductContext, IRepository<Cart> CartContext)
         {
             this.cartContext = CartContext;
             this.productContext = ProductContext;
@@ -35,7 +34,7 @@ namespace S_StateOnline.Services
                 {
                     if (createIFNull)
                     {
-                    cart = CreateNewcart(httpContext);
+                        cart = CreateNewCart(httpContext);
                     }
                 }
             }
@@ -43,12 +42,12 @@ namespace S_StateOnline.Services
             {
                 if (createIFNull)
                 {
-                cart = CreateNewcart(httpContext);
+                    cart = CreateNewCart(httpContext);
                 }
             }
             return cart;
         }
-        private Cart CreateNewcart(HttpContextBase httpContext)
+        private Cart CreateNewCart(HttpContextBase httpContext)
         {
             Cart cart = new Cart();
             cartContext.Insert(cart);
@@ -59,6 +58,7 @@ namespace S_StateOnline.Services
             httpContext.Response.Cookies.Add(cookie);
             return cart;
         }
+
         public void AddToCart(HttpContextBase httpContext, string productId)
         {
             Cart cart = GetCart(httpContext, true);
@@ -79,57 +79,14 @@ namespace S_StateOnline.Services
             }
             cartContext.Commit();
         }
-        public void RemoveFromCart(HttpContextBase httpContext, string ItemId)
+        public void RemoveFromCart(HttpContextBase httpContext, string itemId)
         {
             Cart cart = GetCart(httpContext, true);
-            CartItem item = cart.CartItems.FirstOrDefault(i => i.Id == ItemId);
+            CartItem item = cart.CartItems.FirstOrDefault(i => i.Id == itemId);
             if (item != null)
             {
                 cart.CartItems.Remove(item);
                 cartContext.Commit();
-            }
-        }
-        public List<CartItemVM> GetCartItems(HttpContextBase httpContext)
-        {
-            Cart cart = GetCart(httpContext, false);
-            if (cart != null)
-            {
-                var results = (from b in cart.CartItems
-                               join p in productContext.Collection() on b.ProductId equals p.Id
-                               select new CartItemVM()
-                               {
-                                   Id = b.Id,
-                                   Quantity = b.Quantity,
-                                   ProductName = p.Name,
-                                   Image = p.Image,
-                                   Price = p.Price
-                               }).ToList();
-                return results;
-            }
-            else
-            {
-                return new List<CartItemVM>();
-            }
-        }
-
-        public CartSummaryVM GetCartSummary(HttpContextBase httpContext)
-        {
-            Cart cart = GetCart(httpContext, false);
-            CartSummaryVM model = new CartSummaryVM(0, 0);
-            if (cart != null)
-            {
-                int? cartCount = (from item in cart.CartItems
-                                  select item.Quantity).Sum();
-                decimal? cartTotal = (from item in cart.CartItems
-                                      join p in productContext.Collection() on item.ProductId equals p.Id
-                                      select item.Quantity * p.Price).Sum();
-                model.CartCount = cartCount ?? 0;
-                model.CartTotal = cartTotal ?? decimal.Zero;
-                return model;
-            }
-            else
-            {
-                return model;
             }
         }
     }
