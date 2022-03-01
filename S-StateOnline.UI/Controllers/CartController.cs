@@ -4,16 +4,20 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using S_StateOnline.Core.Contracts;
+using S_StateOnline.Core.Models;
 
-namespace A_StateOnline.UI.Controllers
+namespace S_StateOnline.UI.Controllers
 {
     public class CartController : Controller
     {
         ICartService cartService;
-        public CartController(ICartService CartService)
+        IOrderService orderService;
+        public CartController(ICartService CartService, IOrderService OrderService)
         {
             this.cartService = CartService;
+            this.orderService = OrderService;
         }
+      
         // GET: Cart
         public ActionResult Index()
         {
@@ -37,6 +41,27 @@ namespace A_StateOnline.UI.Controllers
         {
             var cartSummary = cartService.GetCartSummary(this.HttpContext);
             return PartialView(cartSummary);
+        }
+        public ActionResult Checkout()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Checkout(Order order)
+        {
+            var cartItems = cartService.GetCartItems(this.HttpContext);
+            order.OrderStatus = "Order Created";
+            //Process Payment
+
+            order.OrderStatus = "Payment Processed";
+            orderService.CreateOrder(order, cartItems);
+            cartService.ClearCart(this.HttpContext);
+            return RedirectToAction("Thankyou", new { OrderId = order.Id });
+        }
+        public ActionResult Thankyou(string OrderId)
+        {
+            ViewBag.OrderId = OrderId;
+            return View();
         }
     }
 }

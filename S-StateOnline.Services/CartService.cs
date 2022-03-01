@@ -1,15 +1,15 @@
 ﻿using S_StateOnline.Core.Contracts;
 using S_StateOnline.Core.Models;
+using S_StateOnline.Core.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
-
-namespace S_StateOnline.Services
+namespace A_StateOnline.Services
 {
-    public class CartService
+    public class CartService : ICartService
     {
         IRepository<Product> productContext;
         IRepository<Cart> cartContext;
@@ -58,7 +58,6 @@ namespace S_StateOnline.Services
             httpContext.Response.Cookies.Add(cookie);
             return cart;
         }
-
         public void AddToCart(HttpContextBase httpContext, string productId)
         {
             Cart cart = GetCart(httpContext, true);
@@ -88,6 +87,54 @@ namespace S_StateOnline.Services
                 cart.CartItems.Remove(item);
                 cartContext.Commit();
             }
+        }
+        public List<CartItemVM> GetCartItems(HttpContextBase httpContext)
+        {
+            Cart cart = GetCart(httpContext, false);
+            if (cart != null)
+            {
+                var results = (from b in cart.CartItems
+                               join p in productContext.Collection() on b.ProductId equals p.Id
+                               select new CartItemVM()
+                               {
+                                   Id = b.Id,
+                                   Quantity = b.Quantity,
+                                   ProductName = p.Name,
+                                   Image = p.Image,
+                                   Price = p.Price
+                               }).ToList();
+                return results;
+            }
+            else
+            {
+                return new List<CartItemVM>();
+            }
+        }
+        public CartSummaryVM GetCartSummary(HttpContextBase httpContext)
+        {
+            Cart cart = GetCart(httpContext, false);
+            CartSummaryVM model = new CartSummaryVM(0, 0);
+            if (cart != null)
+            {
+                int? cartCount = (from item in cart.CartItems
+                                  select item.Quantity).Sum();
+                decimal? cartTotal = (from item in cart.CartItems
+                                      join p in productContext.Collection() on item.ProductId equals p.Id
+                                      select item.Quantity * p.Price).Sum();
+                model.CartCount = cartCount ?? 0;
+                model.CartTotal = cartTotal ?? decimal.Zero;
+                return model;
+            }
+            else
+            {
+                return model;
+            }
+        }
+        public void ClearCart(HttpContextBase httpContext)
+        {
+            Cart cart = GetCart(httpContext, false);
+            cart.CartItems.Clear();
+            cartContext.Commit();
         }
     }
 }
