@@ -1,13 +1,12 @@
-using A_StateOnline.Services;
 using S_StateOnline.Core.Contracts;
 using S_StateOnline.Core.Models;
-using S_StateOnline.DataAccess.Inmemory;
 using S_StateOnline.DataAccess.Sql;
 using System;
+using S_StateOnline.Services;
 
 using Unity;
 
-namespace A_StateOnline.UI
+namespace S_StateOnline.UI
 {
     /// <summary>
     /// Specifies the Unity configuration for the main container.

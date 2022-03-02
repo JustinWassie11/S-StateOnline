@@ -56,7 +56,7 @@ namespace S_StateOnline.UI.Controllers
             order.OrderStatus = "Payment Processed";
             orderService.CreateOrder(order, cartItems);
             cartService.ClearCart(this.HttpContext);
-            return RedirectToAction("Thankyou", new { OrderId = order.Id });
+            return RedirectToAction("Thank you", new { OrderId = order.Id });
         }
         public ActionResult Thankyou(string OrderId)
         {
