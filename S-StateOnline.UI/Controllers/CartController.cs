@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using S_StateOnline.Core.Contracts;
 using S_StateOnline.Core.Models;
 
-namespace A_StateOnline.UI.Controllers
+namespace S_StateOnline.UI.Controllers
 {
     public class CartController : Controller
     {

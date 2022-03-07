@@ -1,11 +1,11 @@
-﻿using System;
+﻿using S_StateOnline.Core.Contracts;
+using S_StateOnline.Core.Models;
+using S_StateOnline.Core.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using S_StateOnline.Core.Contracts;
-using S_StateOnline.Core.Models;
-using S_StateOnline.Core.ViewModels;
 
 namespace S_StateOnline.Services
 {
@@ -16,12 +16,11 @@ namespace S_StateOnline.Services
         {
             this.orderContext = OrderContext;
         }
-
-        public void CreateOrder(Order baseOrder, List<CartItemVM> cartItems)
+        public void CreateOrder(Order baseOrde, List<CartItemVM> cartItems)
         {
-            foreach(var item in cartItems)
+            foreach (var item in cartItems)
             {
-                baseOrder.OrderItems.Add(new OrderItem()
+                baseOrde.OrderItems.Add(new OrderItem()
                 {
                     ProductId = item.Id,
                     Image = item.Image,
@@ -30,8 +29,26 @@ namespace S_StateOnline.Services
                     Quantity = item.Quantity
                 });
             }
-            orderContext.Insert(baseOrder);
+            orderContext.Insert(baseOrde);
             orderContext.Commit();
+        }
+        public List<Order> GetOrdersList()
+        {
+            return orderContext.Collection().ToList();
+        }
+        public Order GetOrder(string Id)
+        {
+            return orderContext.Find(Id);
+        }
+        public void UpdateOrder(Order updatedOrder)
+        {
+            orderContext.Update(updatedOrder);
+            orderContext.Commit();
+        }
+
+        public List<Order> GetOrderList()
+        {
+            throw new NotImplementedException();
         }
     }
 }
