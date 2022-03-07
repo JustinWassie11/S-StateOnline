@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using S_StateOnline.Core.Contracts;
 using S_StateOnline.Core.Models;
 
-namespace S_StateOnline.UI.Controllers
+namespace A_StateOnline.UI.Controllers
 {
     public class CartController : Controller
     {
@@ -17,34 +17,32 @@ namespace S_StateOnline.UI.Controllers
             this.cartService = CartService;
             this.orderService = OrderService;
         }
-      
         // GET: Cart
         public ActionResult Index()
         {
             var model = cartService.GetCartItems(this.HttpContext);
             return View(model);
         }
-
         public ActionResult addToCart(string Id)
         {
             cartService.AddToCart(this.HttpContext, Id);
             return RedirectToAction("Index");
         }
-
         public ActionResult RemoveFromCart(string Id)
         {
             cartService.RemoveFromCart(this.HttpContext, Id);
             return RedirectToAction("Index");
         }
-
         public PartialViewResult CartSummary()
         {
             var cartSummary = cartService.GetCartSummary(this.HttpContext);
             return PartialView(cartSummary);
         }
+
         public ActionResult Checkout()
         {
             return View();
+
         }
         [HttpPost]
         public ActionResult Checkout(Order order)
@@ -56,7 +54,7 @@ namespace S_StateOnline.UI.Controllers
             order.OrderStatus = "Payment Processed";
             orderService.CreateOrder(order, cartItems);
             cartService.ClearCart(this.HttpContext);
-            return RedirectToAction("Thank you", new { OrderId = order.Id });
+            return RedirectToAction("Thankyou", new { OrderId = order.Id });
         }
         public ActionResult Thankyou(string OrderId)
         {

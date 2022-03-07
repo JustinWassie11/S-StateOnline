@@ -3,6 +3,7 @@ using S_StateOnline.Core.Models;
 using S_StateOnline.DataAccess.Sql;
 using System;
 using S_StateOnline.Services;
+using S_StateOnline.DataAccess.Inmemory;
 
 using Unity;
 
@@ -48,7 +49,9 @@ namespace S_StateOnline.UI
             container.RegisterType<IRepository<Cart>, SqlRepository<Cart>>();
             container.RegisterType<IRepository<CartItem>, SqlRepository<CartItem>>();
             container.RegisterType<IRepository<Customer>, SqlRepository<Customer>>();
+            container.RegisterType<IRepository<Order>, SqlRepository<Order>>();
             container.RegisterType<ICartService, CartService>();
+            container.RegisterType<IOrderService, OrderService>();
         }
     }
 }
